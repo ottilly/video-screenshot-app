@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Video Screenshot App</title>
+  <style>
+    body {
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #drop-zone {
+      border: 2px dashed #999;
+      border-radius: 10px;
+      padding: 40px;
+      text-align: center;
+      width: 80%;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div id="drop-zone">Drag and drop a video file here</div>
+  <script>
+    const dropZone = document.getElementById('drop-zone');
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = 'blue';
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.style.borderColor = '#999';
+    });
+
+    dropZone.addEventListener('drop', async (e) => {
+      e.preventDefault();
+      dropZone.textContent = 'Processing...';
+      const file = e.dataTransfer.files[0];
+      if (file) {
+        try {
+          const result = await window.electronAPI.processVideo(file.path);
+          dropZone.textContent = result;
+        } catch (err) {
+          dropZone.textContent = 'Error: ' + err;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

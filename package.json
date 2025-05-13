@@ -1,0 +1,16 @@
+{
+  "name": "video-screenshot-app",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "@electron/packager": "^18.3.6",
+    "electron": "^29.4.6",
+    "electron-packager": "^17.1.2"
+  },
+  "dependencies": {
+    "fluent-ffmpeg": "^2.1.3"
+  }
+}
